@@ -24,7 +24,7 @@ const LoginForm = (props) => {
 	
 
 	async function handleLogin(username, password) {
-		const url = process.env.REACT_APP_FE_URL || "https://fantabulous-music-finder.herokuapp.com";
+		const url = process.env.REACT_APP_BE_URL || "https://fantabulous-music-finder.herokuapp.com";
 
 		if(username.length === 0 || password.length === 0){
 			alert('Please provide username and password');

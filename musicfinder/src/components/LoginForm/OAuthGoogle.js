@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+
 export default class OAuthGoogle extends Component {
     constructor(props){
         super(props);
@@ -55,7 +56,7 @@ export default class OAuthGoogle extends Component {
 }
 
 export function PostData(userData){
-    const url = process.env.REACT_APP_BE_URL || "https://fantabulous-music-finder.herokuapp.com";
+    const url = process.env.REACT_APP_BE_URL || "https://dashboard.heroku.com/apps/musicfinder22";
     
     return new Promise((resolve, reject) =>{
         try{
@@ -63,6 +64,7 @@ export function PostData(userData){
                 .then((response) => response.json())
                 .then((res) => { resolve(res);})
                 .catch((error) => {reject(error);});
+                this.props.history.push('/');
                 console.log(userData);
         } catch(err){
             console.log({Mesage: "There something went wrong"});
