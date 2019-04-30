@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import {BrowserRouter as Router} from 'react-router-dom';
+import { Link, withRouter} from 'react-router-dom';
+
 const baseUrl = process.env.REACT_APP_FE_URL || "https://fantabulous-music-finder.herokuapp.com";
 class Register extends React.Component {
   constructor() {
@@ -14,6 +14,7 @@ class Register extends React.Component {
         
     };
   }
+  
   handleInput = event => {
     this.setState({ [event.target.name]: event.target.value })
   };
@@ -32,13 +33,13 @@ class Register extends React.Component {
 
   render(){
     return(
-      <Router>
+      <div>
       <RegBar className ='login-box'>
           <form  className ='login-form' onSubmit={e => e.preventDefault()}>
               <input 
                   className ='input-form'
                   type="text"
-                  placeholder="username"
+                  placeholder="Username"
                   name="username"
                   value={this.state.username}
                   onChange={this.handleInput}
@@ -46,7 +47,7 @@ class Register extends React.Component {
               <input 
                   className='input-form'
                   type="email"
-                  placeholder="email"
+                  placeholder="Email"
                   name="email"
                   value={this.state.email}
                   onChange={this.handleInput}
@@ -62,26 +63,33 @@ class Register extends React.Component {
               />  
               <button onClick={this.handleSubmit}> Register</button>           
           </form>
-          <LoginLink to="/login">Already have an account? Log in Here!</LoginLink>
+          <LoginLink to= '/login' >Already have an account? Log in Here!</LoginLink>
       </RegBar>
-      </Router>
+      </div>
+
     );
   }
 }  
-export default Register;
+export default withRouter(Register);
 
 
 const RegBar = styled.div`
-    height: 150px;
-    width: 600px;
+    width: 300px;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-evenly;
     .input-form{
         margin: 5px;
-        height: 25px;
+        width: 300px;
+        height: 30px;
         border: none;
         border-radius: 5px;
         text-align:center;
     }
     button{
+      width: 80px;
+      height: 28px;
+      margin : 18px;
       background: #EB5757;
       border-radius: 5px;
       color : white;

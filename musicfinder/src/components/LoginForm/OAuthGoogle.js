@@ -16,12 +16,12 @@ export default class OAuthGoogle extends Component {
         if (type === 'google' && res.w3.U3) {
             postData = {
                 name: res.w3.ig,
-                provider: 'google',
+                provider: type,
                 email: res.w3.U3,
                 provider_id: res.El,
                 token: res.Zi.access_token,
                 provider_pic: res.w3.Paa
-            }
+              };
         }
         if (postData) {
             PostData(postData).then((result) => {
@@ -33,7 +33,9 @@ export default class OAuthGoogle extends Component {
     }
     render() {
         if (this.state.redirect || sessionStorage.getItem('userData')) {
+            console.log("I am passes");
             return (<Redirect to={'/'}/>)
+            
         }
         const responseGoogle = (response) => {
             console.log("google console");
@@ -53,14 +55,15 @@ export default class OAuthGoogle extends Component {
 }
 
 export function PostData(userData){
-    const url = process.env.REACT_APP_FE_URL || "https://moodybeats.netlify.com/";
+    const url = process.env.REACT_APP_BE_URL || "https://fantabulous-music-finder.herokuapp.com";
     
     return new Promise((resolve, reject) =>{
         try{
-            axios.post(`${url}`, {body: JSON.stringify(userData)} )
+            axios.post(`${url}/api/register/oauth`, {body: JSON.stringify(userData)} )
                 .then((response) => response.json())
                 .then((res) => { resolve(res);})
                 .catch((error) => {reject(error);});
+                console.log(userData);
         } catch(err){
             console.log({Mesage: "There something went wrong"});
         }
