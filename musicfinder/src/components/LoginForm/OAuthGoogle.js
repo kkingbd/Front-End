@@ -39,8 +39,6 @@ export default class OAuthGoogle extends Component {
             
         }
         const responseGoogle = (response) => {
-            console.log("google console");
-            console.log(response);
 		this.signup(response, 'google');
 	}
     return (
@@ -57,14 +55,13 @@ export default class OAuthGoogle extends Component {
 
 export function PostData(userData){
     const url = process.env.REACT_APP_BE_URL || "https://dashboard.heroku.com/apps/musicfinder22";
-    
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
     return new Promise((resolve, reject) =>{
         try{
-            axios.post(`${url}/api/register/oauth`, {body: JSON.stringify(userData)} )
+            axios.post(`${proxyurl}+${url}/api/register/oauth`, {body: JSON.stringify(userData)} )
                 .then((response) => response.json())
                 .then((res) => { resolve(res);})
                 .catch((error) => {reject(error);});
-                this.props.history.push('/');
                 console.log(userData);
         } catch(err){
             console.log({Mesage: "There something went wrong"});
