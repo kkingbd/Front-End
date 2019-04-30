@@ -54,11 +54,12 @@ export default class OAuthGoogle extends Component {
 }
 
 export function PostData(userData){
-    const url = process.env.REACT_APP_BE_URL || "https://dashboard.heroku.com/apps/musicfinder22";
+    //const url = process.env.REACT_APP_BE_URL || "https://dashboard.heroku.com/apps/musicfinder22";
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url =  "https://dashboard.heroku.com/apps/musicfinder22";
     return new Promise((resolve, reject) =>{
         try{
-            axios.post(`${proxyurl}+${url}/api/register/oauth`, {body: JSON.stringify(userData)} )
+            axios.post((proxyurl+url) , {body: JSON.stringify(userData)} )
                 .then((response) => response.json())
                 .then((res) => { resolve(res);})
                 .catch((error) => {reject(error);});
