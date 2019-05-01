@@ -54,16 +54,17 @@ export default class OAuthGoogle extends Component {
 }
 
 export function PostData(userData){
-    //const url = process.env.REACT_APP_BE_URL || "https://dashboard.heroku.com/apps/musicfinder22";
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url =  "https://dashboard.heroku.com/apps/musicfinder22";
+    const url = process.env.REACT_APP_BE_URL || "https://musicfinder22.herokuapp.com/api/register/oauth";
+    //const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    //const url =  "http://localhost:5000/api/register/oauth";
     return new Promise((resolve, reject) =>{
         try{
-            axios.post((proxyurl+url) , {body: JSON.stringify(userData)} )
-                .then((response) => response.json())
-                .then((res) => { resolve(res);})
+            console.log(userData);
+            axios.post(`${url}` , {body: JSON.stringify(userData), name: "md", email: "ree@gmail" } )
+                .then((response) => console.log("success")  || response.json())
+                .then((res) => {  resolve(res);})           
                 .catch((error) => {reject(error);});
-                console.log(userData);
+                
         } catch(err){
             console.log({Mesage: "There something went wrong"});
         }
